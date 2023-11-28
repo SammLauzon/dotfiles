@@ -3,7 +3,7 @@ return {
   opts = {},
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function ()
+  config = function()
     require("oil").setup({
       view_options = {
         -- Show files and directories that start with "."
