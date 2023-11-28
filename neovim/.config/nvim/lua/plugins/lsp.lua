@@ -36,6 +36,8 @@ return {
       nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
       nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
       nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+      vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, { desc = "Signature Help" })
+      nmap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
 
       -- See `:help K` for why this keymap
       nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -79,21 +81,21 @@ return {
         },
       },
       robotframework_ls = {
-        filetypes = {'robot', 'resource'},
+        filetypes = { 'robot', 'resource' },
         robot = {
           language_server = {
             python = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
 
           },
-          pythonpath = {"/home/slauzon/repo/kts_robot", "/home/slauzon/robot_libspec"},
-          variables = {"/home/slauzon/repo/kts_robot/variables/default.py"},
+          pythonpath = { "/home/slauzon/repo/kts_robot", "/home/slauzon/robot_libspec" },
+          variables = { "/home/slauzon/repo/kts_robot/variables/default.py" },
           python = {
             executable = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
           },
         },
       },
       groovyls = {
-        filetypes = {'groovy', 'jenkinsfile'},
+        filetypes = { 'groovy', 'jenkinsfile' },
         groovy = {
           classpath = {
             "/home/slauzon/repo/kts_robot/jenkins/"
@@ -103,9 +105,9 @@ return {
     }
 
     vim.lsp.handlers['textDocument/publishDiagnostics'] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline=false
-    })
+        vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+          underline = false
+        })
 
     -- Setup neovim lua configuration
     require('neodev').setup()
