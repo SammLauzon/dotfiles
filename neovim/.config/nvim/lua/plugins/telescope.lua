@@ -68,7 +68,6 @@ return {
           end
         end
 
-        require('telescope').load_extension('flutter')
         vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
         -- See `:help telescope.builtin`
@@ -91,6 +90,5 @@ return {
         vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
         vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
         vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-        vim.keymap.set('n', '<leader>scf', require('telescope').extensions.flutter.commands, { desc = '[S]earch [C]ommand [F]lutter'})
     end,
 }
