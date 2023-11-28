@@ -1,10 +1,8 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
-  commit = '33eb472b459f1d2bf49e16154726743ab3ca1c6d',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-  -- commit = '35a60f093fa15a303874975f963428a5cd24e4a0'
   },
   build = ':TSUpdate',
   -- [[ Configure Treesitter ]]
