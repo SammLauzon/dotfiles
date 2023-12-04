@@ -83,7 +83,12 @@ return {
             python = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
 
           },
-          pythonpath = { "/home/slauzon/repo/kts_robot", "/home/slauzon/robot_libspec" },
+          pythonpath = {
+            "/home/slauzon/repo/kts_robot/tests_libraries",
+            "/home/slauzon/repo/kts_robot",
+            "/home/slauzon/robot_libspec",
+            "/home/slauzon/repo/test_libraries"
+          },
           variables = { "/home/slauzon/repo/kts_robot/variables/default.py" },
           python = {
             executable = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
@@ -107,7 +112,7 @@ return {
         })
 
     -- Setup neovim lua configuration
-    require('neodev').setup()
+  require('neodev').setup()
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
     local capabilities = vim.lsp.protocol.make_client_capabilities()
