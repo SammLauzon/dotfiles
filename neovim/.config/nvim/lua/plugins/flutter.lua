@@ -54,7 +54,7 @@ return {
 
     require("flutter-tools").setup {
       decorations = {
-        statusline =  {
+        statusline = {
           device = true,
         }
       },
@@ -65,10 +65,16 @@ return {
       lsp = {
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+          enableSnippets = true,
+          renameFilesWithClasses = "always",
+          updateImportsOnRename = true,
+          completeFunctionCalls = true,
+          lineLength = 100,
+        },
       }
     }
     vim.keymap.set('n', '<leader>fs', ':FlutterRun<cr>', { desc = '[F]lutter [S]tart Project' })
     vim.keymap.set('n', '<leader>fr', ':FlutterRestart<cr>', { desc = '[F]lutter [R]estart Project' })
   end,
 }
-

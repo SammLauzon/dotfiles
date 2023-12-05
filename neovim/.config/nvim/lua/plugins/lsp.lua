@@ -75,28 +75,6 @@ return {
           telemetry = { enable = false },
         },
       },
-      robotframework_ls = {
-        filetypes = { 'robot', 'resource' },
-        robot = {
-          language_server = {
-            python = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
-
-          },
-          pythonpath = { "/home/slauzon/repo/kts_robot", "/home/slauzon/robot_libspec" },
-          variables = { "/home/slauzon/repo/kts_robot/variables/default.py" },
-          python = {
-            executable = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
-          },
-        },
-      },
-      groovyls = {
-        filetypes = { 'groovy', 'jenkinsfile' },
-        groovy = {
-          classpath = {
-            "/home/slauzon/repo/kts_robot/jenkins/"
-          },
-        },
-      },
     }
 
     vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, { desc = 'Format File' })
