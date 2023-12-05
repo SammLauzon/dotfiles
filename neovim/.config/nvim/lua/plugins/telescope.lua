@@ -28,6 +28,9 @@ return {
         }
       },
       defaults = {
+        file_ignore_patterns = {
+          ".git/",
+        },
         mappings = {
           i = {
             ['<C-u>'] = false,
