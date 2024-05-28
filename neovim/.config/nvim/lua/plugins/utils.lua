@@ -24,6 +24,13 @@ return {
   },
 
   {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+  },
+
+  {
     'rcarriga/nvim-notify',
     config = function()
       require("notify").setup({
@@ -31,6 +38,9 @@ return {
       })
     end
   },
+
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
+
+  'ntpeters/vim-better-whitespace',
 }

@@ -86,13 +86,28 @@ return {
           pythonpath = {
             "/home/slauzon/repo/kts_robot/tests_libraries",
             "/home/slauzon/repo/kts_robot",
-            "/home/slauzon/robot_libspec",
-            "/home/slauzon/repo/test_libraries"
+            "/home/slauzon/robot_libspec"
+            -- "/home/slauzon/repo/test_libraries"
           },
-          variables = { "/home/slauzon/repo/kts_robot/variables/default.py" },
+          loadVariablesFromArgumentsFile = "/home/slauzon/repo/kts_robot/tests_libraries/tools/config/all_variables.robot",
           python = {
             executable = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
           },
+          completions = {
+            keywords = {
+              format = "all lower"
+            }
+          },
+          libraries = {
+            libdoc = {
+              preGenerate = {
+                "/home/slauzon/repo/kts_robot/tests_libraries/libraries/kinova_shared_libraries/link_test_jig_interfaces/KR27108.py"
+              }
+            }
+          },
+          lint = {
+            keywordResolvesToMultipleKeywords = false,
+          }
         },
       },
       groovyls = {
