@@ -23,6 +23,7 @@ export EDITOR=/opt/homebrew/bin/nvim
 
 # Alias for pretty
 alias la=tree
+alias bat=batcat
 alias cat=bat
 
 # Custom alias
@@ -32,6 +33,7 @@ alias rpi2='ssh -X test@10.0.100.156'
 alias rpi3='ssh -X test@10.0.100.173'
 alias rpi4='ssh -X test@10.0.100.85'
 alias rpi5='ssh -X test@10.0.100.97'
+alias rpi7='ssh -X test@10.0.100.154'
 alias nvim='~/.local/squashfs-root/usr/bin/nvim'
 
 # Git
@@ -122,11 +124,8 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 
 # VENV
-export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/repo
-source ~/.local/bin/virtualenvwrapper.sh
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/home/slauzon/.local/bin/virtualenv
+
 
 # Bat
 export BAT_THEME="zenburn"
@@ -137,9 +136,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 
 # Pythonpath
-export PYTHONPATH=${PYTHONPATH}:${PROJECT_HOME}/kts_robot/tests_libraries:${PROJECT_HOME}/kts_robot/tests_libraries/libraries/kortex_libraries/codebeamer:${PROJECT_HOME}/kts_robot/tests_linters:${PROJECT_HOME}/kts_robot/etc/codebeamer
+export PYTHONPATH=${PYTHONPATH}:${PROJECT_HOME}/kts_robot/tests_libraries:${PROJECT_HOME}/kts_robot/tests_libraries/tests_libraries/libraries/kortex_libraries/codebeamer:${PROJECT_HOME}/kts_robot/tests_linters:${PROJECT_HOME}/kts_robot/etc/codebeamer
 
-# Handt variables
+# Handy variables
 export CB_USER="slauzon"
 export W_SHARED="/run/user/1001/gvfs/smb-share:server=10.0.0.10,share=operations"
 
@@ -148,4 +147,14 @@ export NVM_DIR="$HOME/.config/nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Autoswitch for venv TODO.
+# Autoswitch for venv.
+source ~/.local/bin/scripts/venv_switcher.sh
+
+cd() {
+    if (( $# == 0 )); then
+       builtin cd                # This calls the shell version of cd
+    else
+       builtin cd "$@"           # This calls the shell version of cd
+    fi
+    source ~/.local/bin/scripts/venv_switcher.sh
+}

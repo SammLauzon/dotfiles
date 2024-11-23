@@ -37,7 +37,7 @@ return {
       nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
       nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
       vim.keymap.set('i', '<c-k>', vim.lsp.buf.signature_help, { desc = "Signature Help" })
-      nmap("<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+      nmap("<leader>ca", vim.lsp.buf.code_action, '[C]ode [A]ction')
 
       -- See `:help K` for why this keymap
       nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -54,15 +54,30 @@ return {
     end
 
     -- document existing key chains
-    require('which-key').register {
-      ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-      ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-      ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-      ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-      ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-      ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-      ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-    }
+    local wk = require('which-key')
+    wk.add({
+      { "<leader>c", group = "[C]ode" },
+      { "<leader>c_", hidden = true },
+      { "<leader>d", group = "[D]ocument" },
+      { "<leader>d_", hidden = true },
+      { "<leader>g", group = "[G]it" },
+      { "<leader>g_", hidden = true },
+      { "<leader>h", group = "[H]arpoon" },
+      { "<leader>h_", hidden = true },
+      { "<leader>r", group = "[R]ename" },
+      { "<leader>r_", hidden = true },
+      { "<leader>s", group = "[S]earch" },
+      { "<leader>s_", hidden = true },
+      { "<leader>w", group = "[W]orkspace" },
+      { "<leader>w_", hidden = true },
+      -- ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+      -- ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+      -- ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+      -- ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
+      -- ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+      -- ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+      -- ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+    })
 
     -- mason-lspconfig requires that these setup functions are called in this order
     -- before setting up the servers.
@@ -80,7 +95,7 @@ return {
         filetypes = { 'robot', 'resource' },
         robot = {
           language_server = {
-            python = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
+            python = "/home/slauzon/.pyenv/versions/3.12.7/envs/kts_robot/bin/python"
 
           },
           pythonpath = {
@@ -91,7 +106,7 @@ return {
           },
           loadVariablesFromArgumentsFile = "/home/slauzon/repo/kts_robot/tests_libraries/tools/config/all_variables.robot",
           python = {
-            executable = "/home/slauzon/.virtualenvs/robot_venv/bin/python"
+            executable = "/home/slauzon/.pyenv/versions/3.12.7/envs/kts_robot/bin/python"
           },
           completions = {
             keywords = {
