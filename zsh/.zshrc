@@ -28,12 +28,11 @@ alias cat=bat
 
 # Custom alias
 alias w_shared='cd ${W_SHARED}'
-alias rpi1='ssh -X test@10.0.100.177'
-alias rpi2='ssh -X test@10.0.100.156'
-alias rpi3='ssh -X test@10.0.100.173'
-alias rpi4='ssh -X test@10.0.100.85'
-alias rpi5='ssh -X test@10.0.100.97'
-alias rpi7='ssh -X test@10.0.100.154'
+alias craken-local='craken --gui --api --remote-master-address 192.168.1.100'
+alias rpi-local='ssh -X test@192.168.1.100'
+sshRpi() {
+    ssh -X test@10.0.120."$1"
+}
 alias nvim='~/.local/squashfs-root/usr/bin/nvim'
 
 # Git
@@ -61,8 +60,8 @@ alias ......="cd ../../../../.."
 alias cl='clear'
 
 # Eza
-alias l="eza -l --icons --git -a"
-alias lt="eza --tree --level=2 --long --icons --git"
+alias l="eza -l --icons --git -a --total-size"
+alias lt="eza --tree --level=2 --long --icons --git --total-size"
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
