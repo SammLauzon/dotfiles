@@ -1,0 +1,10 @@
+import = ["~/.config/alacritty/themes/themes/catppuccin.toml"]
+live_config_reload=true
+
+[font]
+normal = { family = "JetBrains Mono Nerd Font", style = "Regular" }
+size = 13.0
+
+# Window settings
+[window]
+opacity = 0.9

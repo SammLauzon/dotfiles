@@ -7,6 +7,9 @@ vim.o.hlsearch = false
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+-- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.g.have_nerd_font = true
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
@@ -51,3 +54,5 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.softtabstop = 4
 -- vim.opt.smarttab = true
+
+vim.o.inccommand = 'split'

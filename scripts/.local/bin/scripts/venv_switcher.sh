@@ -1,6 +1,6 @@
 #!/bin/bash
 baseName=$(echo $(basename $PWD))
-reposDir=~/repo
+reposDir=~/src/work
 dirMatch=$reposDir/$baseName
 # Handle when we are already in a venv.
 if [ ! -z "$VIRTUAL_ENV" ]; then

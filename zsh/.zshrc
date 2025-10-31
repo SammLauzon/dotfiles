@@ -10,7 +10,7 @@ export LANG=en_US.UTF-8
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
-    export EDITOR='mvim'
+    export EDITOR='nvim'
 fi
 
 eval "$(starship init zsh)"
@@ -19,7 +19,7 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
-export EDITOR=/opt/homebrew/bin/nvim
+export EDITOR='~/.local/squashfs-root/usr/bin/nvim'
 
 # Alias for pretty
 alias la=tree
@@ -73,7 +73,7 @@ export FZF_DEFAULT_OPTS="--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38b
 # autocompletion
 # Reevaluate the prompt string each time it's displaying a prompt
 autoload -U compinit; compinit
-source ~/repo/fzf-tab/fzf-tab.plugin.zsh
+source /home/samuel/.oh-my-zsh/custom/plugins/fzf-tab/fzf-tab.plugin.zsh
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
 # set descriptions format to enable group support
@@ -123,7 +123,7 @@ fv() { nvim "$(find . -type f -not -path '*/.*' | fzf)" }
 
 
 # VENV
-export PROJECT_HOME=$HOME/repo
+export PROJECT_HOME=$HOME/src/work
 
 
 # Bat
@@ -157,3 +157,9 @@ cd() {
     fi
     source ~/.local/bin/scripts/venv_switcher.sh
 }
+export PATH=~/.npm-global/bin:$PATH
+
+. "$HOME/.local/bin/env"
+
+# zsh
+eval "$(navi widget zsh)"
