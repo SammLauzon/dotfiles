@@ -169,50 +169,24 @@ return {
 
     local servers = {
       lua_ls = {
-        Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
+        settings = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
         },
       },
-      robotframework_ls = {
+      robotcode = {
         filetypes = { 'robot', 'resource' },
-        robot = {
-          language_server = {
-            python = "/home/samuel/.pyenv/versions/3.12.7/envs/kts_robot/bin/python"
-
-          },
-          pythonpath = {
-            "/home/samuel/src/work/kts_robot/tests_libraries",
-            "/home/samuel/src/work/kts_robot",
-            "/home/samuel/robot_libspec"
-            -- "/home/slauzon/repo/test_libraries"
-          },
-          loadVariablesFromArgumentsFile = "/home/samuel/src/work/kts_robot/tests_libraries/tools/config/all_variables.robot",
-          python = {
-            executable = "/home/samuel/.pyenv/versions/3.12.7/envs/kts_robot/bin/python"
-          },
-          completions = {
-            keywords = {
-              format = "all lower"
-            }
-          },
-          libraries = {
-            libdoc = {
-              preGenerate = {
-                "/home/samuel/src/work/kts_robot/tests_libraries/libraries/kinova_shared_libraries/link_test_jig_interfaces/KR27108.py"
-              }
-            }
-          },
-          lint = {
-            keywordResolvesToMultipleKeywords = false,
-          }
-        },
+        root_markers = { 'robot.toml', '.git' },
       },
       groovyls = {
         filetypes = { 'groovy', 'jenkinsfile' },
-        groovy = {
-          classpath = {
-            "/home/samuel/src/work/kts_robot/jenkins/"
+        settings = {
+          groovy = {
+            classpath = {
+              "/home/samuel/src/work/kts_robot/jenkins/"
+            },
           },
         },
       },
@@ -226,19 +200,33 @@ return {
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+    -- Setup mason-lspconfig for Mason-managed servers
     require('mason-lspconfig').setup {
-      ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      ensure_installed = {},
       automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for ts_ls)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
+          -- Add capabilities
+          local server_config = vim.tbl_deep_extend('force', {}, server)
+          server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+
+          -- Use new vim.lsp.config API
+          vim.lsp.config(server_name, server_config)
+          vim.lsp.enable(server_name)
         end,
       },
     }
+
+    -- Manually setup servers not handled by mason-lspconfig (like robotcode)
+    local mason_servers = require('mason-lspconfig').get_installed_servers()
+    for server_name, config in pairs(servers) do
+      if not vim.tbl_contains(mason_servers, server_name) then
+        local server_config = vim.tbl_deep_extend('force', {}, config)
+        server_config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server_config.capabilities or {})
+        vim.lsp.config(server_name, server_config)
+        vim.lsp.enable(server_name)
+      end
+    end
   end,
 }
